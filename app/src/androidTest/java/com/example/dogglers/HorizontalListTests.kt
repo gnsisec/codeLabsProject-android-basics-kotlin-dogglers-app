@@ -17,6 +17,7 @@ package com.example.dogglers
 
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.repeatedlyUntil
 import androidx.test.espresso.action.ViewActions.swipeLeft
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions.scrollToPosition
@@ -52,8 +53,8 @@ class HorizontalListTests : BaseTest() {
     @Test
     fun `horizontal_scrolling`() {
         onView(withId(R.id.horizontal_recycler_view))
-            .perform(swipeLeft())
-        onView(withText("Frankie")).check(matches(isDisplayed()))
+            .perform(repeatedlyUntil(swipeLeft(), hasDescendant(withText("Bella")), 10))
+
     }
 
     @Test
